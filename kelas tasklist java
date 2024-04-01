@@ -1,0 +1,52 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        TaskList taskList = new TaskList();
+        Scanner scanner = new Scanner(System.in);
+
+        boolean isRunning = true;
+        while (isRunning) {
+            System.out.println("Menu:");
+            System.out.println("1. Tambah Tugas");
+            System.out.println("2. Hapus Tugas");
+            System.out.println("3. Tampilkan Tugas");
+            System.out.println("4. Keluar");
+            System.out.print("Pilihan Anda: ");
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Membuang new line
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Masukkan judul tugas: ");
+                    String title = scanner.nextLine();
+                    System.out.print("Masukkan deskripsi tugas: ");
+                    String description = scanner.nextLine();
+                    Task task = new Task(title, description);
+                    taskList.addTask(task);
+                    System.out.println("Tugas berhasil ditambahkan!");
+                    break;
+                case 2:
+                    System.out.print("Masukkan judul tugas yang akan dihapus: ");
+                    String taskTitle = scanner.nextLine();
+                    taskList.removeTask(taskTitle);
+                    System.out.println("Tugas berhasil dihapus!");
+                    break;
+                case 3:
+                    System.out.println("Daftar Tugas:");
+                    taskList.displayTasks();
+                    break;
+                case 4:
+                    isRunning = false;
+                    System.out.println("Terima kasih!");
+                    break;
+                default:
+                    System.out.println("Pilihan tidak valid!");
+                    break;
+            }
+            System.out.println();
+        }
+
+        scanner.close();
+    }
+}
